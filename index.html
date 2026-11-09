@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angklung Robot - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- TOP HEADER -->
+    <nav class="top-navbar">
+  <!-- SISI KIRI: Logo & Judul -->
+  <div class="brand">
+    <img src="assets/logo.png" alt="Logo" class="brand-logo">
+    <span class="brand-title">
+      <span class="text-blue">ANGKLUNG</span> <span id="muhayara-text">ROBOT</span>
+    </span>
+  </div>
+
+  <!-- SISI KANAN: Tombol Tema, Status Koneksi, & Jam -->
+  <div class="header-right">
+    <button class="theme-toggle" id="themeToggle">☀️</button>
+    <div class="status-badge">
+      <div class="conn-dot" id="connDot"></div>
+      <span id="connLabel">CONNECTED</span>
+    </div>
+    <div class="clock-display" id="clock">00:00:00</div>
+  </div>
+</nav>
+
+    <div class="main-layout">
+      
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h3>DAFTAR LAGU</h3>
+        </div>
+        <div class="song-list" id="songList"></div>
+      </aside>
+
+      <!-- MAIN CONTENT AREA -->
+      <main class="content-area">
+        
+        <!-- METRICS ROW -->
+        <div class="metrics-grid">
+          <div class="card metric-card">
+            <div class="metric-title">STATUS KONEKSI</div>
+            <div class="metric-value orange" id="statConn">Menghubungkan...</div>
+            <div class="metric-sub">MQTT Broker WebSockets</div>
+          </div>
+
+          <div class="card metric-card">
+            <div class="metric-title">MOTOR STATUS</div>
+            <div class="metric-value orange" id="statMotor">IDLE</div>
+            <div class="metric-sub">RS-545SH Actuators</div>
+          </div>
+
+          <div class="card metric-card">
+            <div class="metric-title">TEMPO LAGU</div>
+            <div class="tempo-control">
+              <span class="metric-value" id="tempoVal">45</span> <small>BPM</small>
+              <input type="range" id="tempoSlider" min="20" max="100" value="45" class="slider">
+            </div>
+          </div>
+        </div>
+
+        <!-- AUDIO WAVE VISUALIZER CANVAS -->
+        <div class="card wave-card">
+          <div class="card-header">
+            <h3>REALTIME AUDIO WAVE VISUALIZER</h3>
+            <span class="badge-live">LIVE FREQUENCY</span>
+          </div>
+          <div class="canvas-container">
+            <canvas id="waveCanvas"></canvas>
+          </div>
+          <div class="viz-bars-mini" id="vizBars"></div>
+        </div>
+
+        <!-- PLAYER CONTROLLER -->
+        <div class="card player-card">
+          <div class="player-info">
+            <span class="now-playing-label">NOW PLAYING</span>
+            <h2 id="npTitle">PILIH LAGU UNTUK MEMULAI</h2>
+          </div>
+
+          <div class="progress-container">
+            <span id="timeCur">0:00</span>
+            <div class="progress-track" id="progressTrack">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span id="timeTotal">0:00</span>
+          </div>
+
+          <div class="player-controls">
+            <button class="btn-ctrl" id="btnPrev" title="Sebelumnya">⏮</button>
+            <button class="btn-play" id="playBtn" title="Mainkan">▶</button>
+            <button class="btn-ctrl" id="btnStop" title="Stop">⏹</button>
+            <button class="btn-ctrl" id="btnNext" title="Selanjutnya">⏭</button>
+          </div>
+        </div>
+
+        <!-- MANUAL NOTE TRIGGER -->
+        <div class="card">
+          <div class="card-header">
+            <h3>MANUAL NOTE TRIGGER</h3>
+          </div>
+          <div class="note-grid" id="noteGrid"></div>
+        </div>
+
+  <script src="js/songs.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
